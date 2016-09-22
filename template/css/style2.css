@@ -1,0 +1,502 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 100px;
+  overflow: auto;
+  background-repeat: no-repeat;
+  background-size:     cover;
+}
+
+.nav_top {
+	top: 0;
+	position:fixed;
+	background-color: black;
+	width: 100%;
+	height: 4vh; 
+	margin-bottom: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 9999999;
+}
+
+
+
+h1 {
+  display: block;
+  font-size: 50px;
+  margin: 25px auto 0;
+  width: 975px;
+}
+
+h1>small {
+  color: #aaaaaa;
+  font-size: .5em;
+}
+
+
+
+.profile {
+	border-radius: 25px 25px 10px 10px;
+-moz-border-radius: 25px 25px 10px 10px;
+-webkit-border-radius: 25px 25px 10px 10px;
+border: 0px solid #000000;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin:   25px auto 50px;
+  height:   300px;
+  position: relative;
+  width:    975px;
+  background-color: white;
+  z-index: 1;
+}
+
+.profile-banner {
+  left:     0;
+  overflow: hidden;
+  position: absolute;
+  top:      0;
+  z-index:  3;
+}
+
+.profile-picture {
+  background-position: center center;
+  background-size: cover;
+  border: 5px #efefef solid;
+  border-radius: 15px;
+  bottom: -50px;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2), 1px 1px 4px rgba(0,0,0,0.3);
+  height: 148px;
+  left: 75px;
+  position: absolute;
+  width: 148px;
+  z-index: 5;
+}
+.profile-background {
+    background-size: 80px 60px;
+    background-repeat: no-repeat;
+}
+
+div.profile-stats {
+  bottom: 0;
+  border-top: 1px solid rgba(0,0,0,0.5);
+  left: 0;
+  padding: 15px 15px 15px 350px;
+  position: absolute;
+  right: 0;
+  z-index: 4;
+  /* Generated Gradient */
+  background: -moz-linear-gradient(top,  rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.51) 3%, rgba(0,0,0,0.75) 61%, rgba(0,0,0,0.5) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.5)), color-stop(3%,rgba(0,0,0,0.51)), color-stop(61%,rgba(0,0,0,0.75)), color-stop(100%,rgba(0,0,0,0.5)));
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0.5) 0%,rgba(0,0,0,0.51) 3%,rgba(0,0,0,0.75) 61%,rgba(0,0,0,0.5) 100%);
+ background: -o-linear-gradient(top,  rgba(255,255,255,0.5) 0%,rgba(0,0,0,0.51) 3%,rgba(0,0,0,0.75) 61%,rgba(0,0,0,0.5) 100%);
+  background: -ms-linear-gradient(top,  rgba(255,255,255,0.5) 0%,rgba(0,0,0,0.51) 3%,rgba(0,0,0,0.75) 61%,rgba(0,0,0,0.5) 100%);
+  background: linear-gradient(to bottom,  rgba(255,255,255,0.5) 0%,rgba(0,0,0,0.51) 3%,rgba(0,0,0,0.75) 61%,rgba(0,0,0,0.5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80000000',GradientType=0 );
+
+}
+
+div.profile-stats ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.profile-stats ul li {
+  color: #efefef;
+  display: block;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 50px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7)
+}
+
+div.profile-stats li span {
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+a.follow {
+  display: block;
+  float: right;color: #ffffff;
+  margin-top: 5px;
+  text-decoration: none;
+  
+  /* This is a copy and paste from Bootstrap */
+  background-color: #49afcd;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #49afcd;
+  background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+  background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+  background-repeat: repeat-x;
+  border-color: #2f96b4 #2f96b4 #1f6377;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+a.follow.followed {
+  
+  /* Once again copied from Boostrap */
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #5bb75b;
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top, #62c462, #51a351);
+  background-image: linear-gradient(to bottom, #62c462, #51a351);
+  background-repeat: repeat-x;
+  border-color: #51a351 #51a351 #387038;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+div.profile-name2 {
+  bottom: -50px;
+  color: #354B63;
+  font-size: 40px;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  width: 100%;
+  margin-top: -20px;
+}
+h1.profile-name {
+  color: #354B63;
+  font-size: 40px;
+  margin-top: -40px;
+  margin-left: 310px;
+}
+div.container {
+	border-radius: 25px 25px 10px 10px;
+	-moz-border-radius: 25px 25px 10px 10px;
+	-webkit-border-radius: 25px 25px 10px 10px;
+	border: 0px solid #000000;	
+	margin-top: 10px;
+	height: 353px;
+	background: rgba(0, 0, 0, 0.75);
+	margin: auto;
+	width: 975px;
+	margin-top: 8px; 
+	z-index: 1;
+}
+div.profile-info{
+	width: 304px;
+	min-height: 500px;
+	margin-left: 24.5%;
+	top: 380px;
+	border-radius: 0px 0px 0px 25px;
+	-moz-border-radius: 0px 0px 0px 25px;
+	-webkit-border-radius: 0px 0px 0px 25px;
+	border: 1px solid gray;
+	background: rgba(255, 255, 255, 0.95);
+	float: left;
+}
+div.tweets{
+	width: 665px;
+	min-height: 500px;
+	display:block;
+	overflow:hidden;
+	margin-left: 3px;
+	float: left;
+	top: 380px;
+	border-radius: 0px 0px 25px 0px;
+	-moz-border-radius: 0px 0px 25px 0px;
+	-webkit-border-radius: 0px 0px 25px 0px;
+	border: 1px solid gray;
+	background: rgba(255, 255, 255, 1);	
+}
+
+.profile-small-photo{
+	height:50px;
+	width: 50px;
+	margin-left: 3px;
+	margin-top: 4px;
+	margin-right: 3px;
+	margin-bottom: 5px;
+	margin: auto;
+	float: left;
+	border-radius: 6px 6px 6px 6px;
+	background-color: #efefef;
+}
+.profile-picture-edit{
+	height: 20px;
+	width: 100%;
+	top: 50%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.7);
+	text-align:center;
+	
+}
+.editProfilePhotoConcent {
+	position: fixed;
+	width: 400px;
+	height:350px;
+	border: 2px solid gray;
+	background-color: white;
+	border-radius: 10px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 99999;
+}
+.editProfilePhotoConcent label{
+	color: rgba(0, 0, 0, 0.71);
+	margin-left: 60px;
+}
+.editProfilePhotoConcent h2{
+	font-size: 24px;
+	font-weight: bold;
+}
+#editProfilePhotoPreview {
+	position: absolute;
+	font-size: 30px;
+	top: 50px;
+	left: 130px;
+	width: 148px;
+	height: 148px;
+	text-align: center;
+	line-height: 180px;
+	font-weight: bold;
+	color: #C0C0C0;
+	background-color: #FFFFFF;
+	overflow: hidden;
+}
+#editProfilePhotoPreviewImage{
+	width:100%;
+	height:100%;
+	margin: auto;
+}
+#editProfilePhotoSelectImage {
+	padding: 5px 0px 0px 0px;
+	position: absolute;
+	bottom: 0px;
+	width: 400px;
+	background-color: #FEFFED;
+	border-radius: 10px;
+}
+.editProfilePhotoSubmit {
+	font-size: 16px;
+	background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+	border: 1px solid #e5a900;
+	color: #4E4D4B;
+	font-weight: bold;
+	cursor: pointer;
+	width: 280px;
+	border-radius: 5px;
+	padding: 10px 0;
+	outline: none;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 15%;
+}
+.editProfilePhotoSubmit:hover {
+	background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
+}
+.editProfilePhotoFile {
+	float: left;
+}
+#editProfilePhotoMessage {
+	position:absolute;
+	top:120px;
+	left:815px;
+}
+#success
+{
+	color:green;
+}
+#invalid
+{
+	color:red;
+}
+#line
+{
+	margin-top: 200px; /* 274 */
+}
+#error
+{
+	color:red;
+}
+#error_message
+{
+	color:blue;
+}
+#editProfilePhotoLoading
+{
+	display:none;
+	position:absolute;
+	top:50px;
+	left:850px;
+	font-size:25px;
+}
+
+.editProfilePhoto{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75); /*this sets the slightly see-through black*/
+    z-index: 100; /*Make this less than the existing popup div*/
+}
+.tweeth3{
+	font-weight: bold;
+	color: gray;
+	
+}
+.textarea-tweet {
+	resize: none;
+	width: 90%;
+	height: 50px;
+	margin: 25px 0px 0px 0px;
+	margin-left: 30px;
+}
+.footer {
+	position: fixed;
+	bottom: 10px;
+	margin: auto;
+	
+
+}
+.footer p {
+	font-size: 12px;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	color: white;	
+}
+.tweets-mesageboxButton {
+	background: #3498db;
+	background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+	background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+	background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+	background-image: -o-linear-gradient(top, #3498db, #2980b9);
+	background-image: linear-gradient(to bottom, #3498db, #2980b9);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-family: Georgia;
+	color: #ffffff;
+	font-size: 14px;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	left: 400px;
+	margin-left: 82.5%;
+}
+
+.tweets-mesageboxButton:hover {
+	background: #3cb0fd;
+	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+	text-decoration: none;
+
+}
+.mytweet{
+	margin-bottom: 5px;
+}
+a.tweet{
+	text-decoration: none;
+}
+a.tweetprofile{
+	text-decoration: none;
+}
+.mytweetButtons{
+	text-align: center;
+	width: 100%;
+}
+.alert-box {
+	color:#555;
+	border-radius:10px;
+	font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+	padding:10px 36px;
+	margin:10px;
+}
+.alert-box span {
+	font-weight:bold;
+	text-transform:uppercase;
+}
+.error {
+	background:#ffecec url('../img/error.png') no-repeat 10px 50%;
+	border:1px solid #f5aca6;
+}
+.success {
+	background:#e9ffd9 url('../img/success.png') no-repeat 10px 50%;
+	border:1px solid #a6ca8a;
+}
+
+.zoomTweet {
+	width: 660px;
+	height: 400px;
+	background-color: white;
+	padding: 10px 10px 10px 10px;
+	position: fixed;
+	background-color: white;
+	border-radius: 10px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	z-index: 99999;
+
+}
+.zoomTweetName {
+	font-size: 26px;
+}
+.zoomTweetLogin {
+	font-size: 14px;
+	color: gray;
+}
+.zoomTweetText{
+	font-size: 26px;
+}
+.shareLikeColumn {
+	margin-top: 20px;
+	width: 150px;
+	height: 40px;
+	border: 1px solid gray;
+	display: block;
+	float: left;
+}
+span.shareText{
+	color: gray;
+	font-size: 14px;
+}
+.like {
+	margin-top: 20px;
+	width: 150px;
+	height: 40px;
+	border: 0.5px solid gray;
+	display: block;
+	float: left;
+}
+.sharePhotoColumn{
+	margin-top: 20px;
+	width: 350px;
+	height: 40px;
+	border: 0.5px solid gray;
+	display: block;
+	float: left;
+}
+.ui-dialog-osx {
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius: 8px 8px 8px 8px; border-width: 8px 8px 8px 8px;
+}
+
+
+
+
+
