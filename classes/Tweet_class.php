@@ -141,15 +141,6 @@ class Tweet extends User{
         if( $this->getTweet($userID, $tweetID) != false){
             $this->loadDataFromDb($userID);
             foreach($this->getTweet($userID, $tweetID) as $tweet){
-                /*
-                echo '
-						<div class="mytweet" id="'.$tweetID.'" style="clear:both; ">
-							<a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>
-							<a class="tweet" href="#"><div>
-								<p style="color:black; left: 5px; font-width: bold; width:100%;">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'<small>@'.$this->getTmp('login').'</small></p><div style="align: right;">'.$tweet["date"].'</div>
-								<p>'.$tweet["text"].'</p>
-						    </div></a>
-						</div>';*/
 
                 echo '<div class="zoomTweetHeader">
                             <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').');" background-size: cover; background-repeat: no-repeat;"></div></a>
