@@ -9,9 +9,5 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 	}
 }
 
-if(isset($_GET['reload'])){
-    header("Location: index.php");
-
-}
 
 

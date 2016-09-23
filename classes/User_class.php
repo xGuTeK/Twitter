@@ -50,7 +50,7 @@ class User extends DB {
     function setEmail($email) {
         if($this->validateEmail($email) == true){
             if($this->checkEmailExist($email) == true){
-                $this->email = $this->conn->escape_string($email);
+                $this->email = $this->connect()->escape_string($email);
 
                 return true;
             } else {
@@ -124,7 +124,6 @@ class User extends DB {
         $result = $this->connect()->query($sql);
         if($result->num_rows >0){
             $_SESSION['email'] = $email;
-            $this->setEmail($email);
 
             $this->loadDataFromDb($email, "login");
 
@@ -362,6 +361,7 @@ class User extends DB {
 			$this->setLogin($row["login"]);
 			$this->setName($row["name"]);
 			$this->setSurname($row["surname"]);
+            $this->setEmail($email);
 		}
 		$tmp['id'] = $row["id"];
 		$tmp['login'] = $row["login"];
