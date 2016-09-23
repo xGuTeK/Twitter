@@ -1,14 +1,4 @@
 <?php
-session_start();
-
-require_once '../classes/MysqlConn_class.php';
-require_once '../classes/User_class.php';
-
-$db = new DB();
-$user = new User();
-
-$user->login('gutek@gmail.com', 'da39a3ee5e6b4b0d3255bfef95601890afd80709');
-
 
 if(isset($_SESSION["email"]) && !empty($_SESSION["email"]) ){ //&& $user->isMyProfile($_SESSION["email"]) == true
 	if(isset($_FILES["editProfilePhotoFile"]["type"])){

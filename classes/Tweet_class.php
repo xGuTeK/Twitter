@@ -143,7 +143,7 @@ class Tweet extends User{
             foreach($this->getTweet($userID, $tweetID) as $tweet){
 
                 echo '<div class="zoomTweetHeader">
-                            <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').');" background-size: cover; background-repeat: no-repeat;"></div></a>
+                            <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>
                             <p class="zoomTweetName">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'</p>
                                 <span class="zoomTweetLogin">@'.$this->getTmp('login').'</span>';
                 if ($this->isMyProfile($userID, $_SESSION['email']) == false){

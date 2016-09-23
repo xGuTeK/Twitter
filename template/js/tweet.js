@@ -75,6 +75,8 @@ $(function(){
 					.dialog({
 						width: 730,
 						modal: true,
+						show: {effect: 'fold', duration: 550},
+						hide: {effect: 'fade', duration: 1000},
 						resizable: false,
 						draggable: false,
 						dialogClass: 'ui-dialog-zoomTweet',
