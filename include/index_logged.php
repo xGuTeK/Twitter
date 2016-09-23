@@ -105,7 +105,7 @@ if(isset($_SESSION["email"])){
 		</div>	
 		
 		<div class="profile-stats">
-			<ul>
+			<ul id="profileStatsUL">
 				<li><?php echo $user->getTmp('tweets'); ?> <span>Tweets</span></li>
 				<li><?php echo $user->getTmp('following') ?> <span>Following</span></li>
 				<li><?php echo $user->getTmp('followers'); ?><span>Followers</span></li>

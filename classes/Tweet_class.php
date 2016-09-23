@@ -72,7 +72,7 @@ class Tweet extends User{
             $result = $this->connect()->query($sql);
 
             $this->userTweetCountUpdate($this->convertToUserId($userID, "email"), '+');
-            echo $sql;
+
             echo 'Success';
 
         } else {
@@ -155,7 +155,7 @@ class Tweet extends User{
                             <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').');" background-size: cover; background-repeat: no-repeat;"></div></a>
                             <p class="zoomTweetName">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'</p>
                                 <span class="zoomTweetLogin">@'.$this->getTmp('login').'</span>';
-                if ($this->isMyProfile($userID) == false){
+                if ($this->isMyProfile($userID, $_SESSION['email']) == false){
 	                echo '<span class="tweetZoomFollow"><a href="javascript:void(0);" class="follow" style="height: 23px">Follow '.$this->getTmp('name').'</a></span>';
                 }
                 echo '<hr style="clear:both;">

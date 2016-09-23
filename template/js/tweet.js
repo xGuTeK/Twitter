@@ -42,6 +42,7 @@ $(function(){
 									success: function(data)
 									{
 										alert(data);
+										console.log($('ul li:last-child').innerHTML);
 									}
 								});
                                 $(this).dialog("close");

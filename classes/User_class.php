@@ -244,23 +244,28 @@ class User extends DB {
     function getFollowingCount() {
         return $this->FollowingCount;
     }
-	function isMyProfile($login){
-		//$email = $this->connect()->escape_string($email);
-		if(strlen($login) > 0){
-			if($login == $this->getLogin()){
+	function isMyProfile($login, $tmpLogin = ""){
+		$login = $this->connect()->escape_string($login);
 
-				return true;
-			} else {
-			
-				return false;
-			}
-		}
+		if(strlen($login) > 0) {
+		        if($tmpLogin != ''){
+                   if($tmpLogin == $login){
+                       return true;
+                   } else {
+                    return false;
+                }
+                } else if ($login == $this->getLogin()) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
 	}
 	
 	public function convertToUserId($value, $type = "login")
 	{
 		if(!empty($value)){
-			$value =  $this->conn->escape_string($value);
+			$value =  $this->connect()->escape_string($value);
 
             if($type == 'login') {
                 $sql = "SELECT `id` FROM `users` WHERE `login`='$value';";
@@ -277,7 +282,7 @@ class User extends DB {
 	public function convertLoginToEmail($login)
 	{
 		if(!empty($login)){
-			$login =  $this->conn->escape_string($login);
+			$login =  $this->connect()->escape_string($login);
 		
 			$sql = "SELECT `email` FROM `users` WHERE `login`='$login';";
 			$result = $this->connect()->query($sql);
