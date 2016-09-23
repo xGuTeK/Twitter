@@ -72,7 +72,7 @@ class Tweet extends User{
             $result = $this->connect()->query($sql);
 
             $this->userTweetCountUpdate($this->convertToUserId($userID, "email"), '+');
-
+            echo $sql;
             echo 'Success';
 
         } else {
@@ -89,12 +89,11 @@ class Tweet extends User{
 
             $sql = "SELECT * FROM `tweets` WHERE `id`='$tweetID' AND `user_id` = '$userID';";
             $result = $this->connect()->query($sql);
-
             if($result->num_rows > 0){
                 while ($row = $result->fetch_assoc()) {
 
-                    $tweetArr["text"] = $row["text"];
-                    $tweetArr["date"] = $row["date"];
+                    $tweetArr[1]["text"] = $row["text"];
+                    $tweetArr[1]["date"] = $row["date"];
                 }
                 $result->free();
 
@@ -139,17 +138,46 @@ class Tweet extends User{
        $userID = $this->connect()->escape_string($userID);
        $tweetID = $this->connect()->escape_string($tweetID);
 
-        if( $this->getTweet($userID) != false){
-
+        if( $this->getTweet($userID, $tweetID) != false){
+            $this->loadDataFromDb($userID);
             foreach($this->getTweet($userID, $tweetID) as $tweet){
+                /*
                 echo '
-						<div class="mytweet" id="'.$tweet['tweetID'].'" style="clear:both; ">
+						<div class="mytweet" id="'.$tweetID.'" style="clear:both; ">
 							<a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>
 							<a class="tweet" href="#"><div>
 								<p style="color:black; left: 5px; font-width: bold; width:100%;">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'<small>@'.$this->getTmp('login').'</small></p><div style="align: right;">'.$tweet["date"].'</div>
 								<p>'.$tweet["text"].'</p>
 						    </div></a>
-						</div>';
+						</div>';*/
+
+                echo '<div class="zoomTweetHeader">
+                            <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').');" background-size: cover; background-repeat: no-repeat;"></div></a>
+                            <p class="zoomTweetName">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'</p>
+                                <span class="zoomTweetLogin">@'.$this->getLogin().'</span>';
+                if ($this->isMyProfile($userID) == false){
+	                echo '<span class="tweetZoomFollow"><a href="javascript:void(0);" class="follow" style="height: 23px">Follow '.$this->getTmp('name').'</a></span>';
+                }
+                echo '<hr style="clear:both;">
+                </div>
+                <div class="zoomTweetText">'.$this->getTweet($this->getTmp('email'), $tweetID)[1]["text"].'</div>
+<div class="zoomTweetStats">
+	<div class="shareLikeColumn">
+		<span class="shareText">Podane dalej</span><span class="shareText">Polubienia</span>
+	</div>
+	<div class="sharePhotoColumn">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/729229049302749184/dR3WjBSO_normal.jpg" alt="medo nanna">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777207786354700288/HX7k-DiI_normal.jpg" alt="Mohammed Barzan.">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/715736743933120512/r7_tNJBi_normal.jpg" alt="rosy1319">
+		<img style="width: 27px; height: 27px" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_6_normal.png" alt="Jan Schorling">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/707187549396193284/rp7XrQt4_normal.jpg" alt="Ruby K.">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/3223758993/579d07905d21f75c926f0c049a35915e_normal.jpeg" alt="Corelma Chamorro">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777544943380422656/b1fVbRH2_normal.jpg" alt="Ola">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/774198825493889024/TmEx7FEU_normal.jpg" alt="Hamzea I. Awadat">
+		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/754585327541559296/R8q5grDD_normal.jpg" alt="José Diego Manzanera">
+	</div>
+</div>';
+
             }
 
         }
@@ -167,7 +195,7 @@ class Tweet extends User{
                     echo '
 						<div class="mytweet" id="'.$tweet['tweetID'].'" style="clear:both; ">
 							<a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>
-							<a class="tweet" href="#"><div>
+							<a class="tweetLink" id="zoomTweetLink" href="javascript:void(0);" data-userID="'.$user_id.'" data-tweetID="'.$tweet['tweetID'].'"><div>
 								<p style="color:black; left: 5px; font-width: bold; width:100%;">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'<small>@'.$this->getTmp('login').'</small></p><div style="align: right;">'.$tweet["date"].'</div>
 								<p>'.$tweet["text"].'</p>
 						    </div></a>

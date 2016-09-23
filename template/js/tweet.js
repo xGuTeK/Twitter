@@ -64,6 +64,42 @@ $(function(){
 		}
 	});
 
+	function zoomTweet(userID, tweetID) {
+		$.ajax({
+			url: "index.php?act=showTweet&userID=" + userID + "&tweetID=" + tweetID,
+			type: "GET",
+			success: function (data) {
+				$('<div class="zoomTweetDialog"></div>').appendTo('body')
+					.html(data)
+					.dialog({
+						width: 730,
+						modal: true,
+						resizable: false,
+						draggable: false,
+						dialogClass: 'ui-dialog-zoomTweet',
+						open: function (event, ui) {
+							$(".ui-widget-overlay").css({
+								opacity: 0.75,
+								filter: "Alpha(Opacity=0)",
+								backgroundColor: "black"
+							});
+							$(this).siblings('.ui-dialog-titlebar').remove();
+							$('.ui-widget-overlay').click(function () {
+								$('.ui-dialog-zoomTweet').remove();
+								$('.zoomTweetDialog').remove();
 
-	
+							});
+						},
+						position: {my: "center top", at: "center top+75"}
+					});
+				}
+
+			});
+	}
+
+
+	$('.tweetLink').click(function(e){
+		zoomTweet(this.getAttribute('data-userID'), this.getAttribute('data-tweetID'));
+	})
+
 });
