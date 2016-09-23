@@ -8,7 +8,7 @@ $db = new DB();
 $user = new User();
 
 if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
-    $user->login('gutek@gmail.com', '9bc34549d565d9505b287de0cd20ac77be1d3f2c');
+    //$user->login('gutek@gmail.com', '9bc34549d565d9505b287de0cd20ac77be1d3f2c');
 	
 	if(isset($_GET["act"])){
 		switch($_GET["act"]){
@@ -55,9 +55,16 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
             case 'tweet':
                 include_once 'include\tweet.php';
                 break;
+            case 'showTweet':
+                include_once 'include\tweet.php';
+                break;
             case 'unfollow':
             case 'follow':
                 include_once 'include\follow.php';
+                break;
+            case 'logout':
+                session_destroy();
+                header("Location: index.php");
                 break;
 		}
 	} else {
