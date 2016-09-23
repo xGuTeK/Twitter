@@ -9,11 +9,11 @@ body {
 .nav_top {
 	top: 0;
 	position:fixed;
-	background-color: black;
+	background-color: #49afcd;
 	width: 100%;
 	height: 4vh; 
 	margin-bottom: 10px;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(59, 89, 152, 0.75);
 	z-index: 9999999;
 }
 
@@ -178,16 +178,15 @@ h1.profile-name {
   margin-left: 310px;
 }
 div.container {
-	border-radius: 25px 25px 10px 10px;
-	-moz-border-radius: 25px 25px 10px 10px;
-	-webkit-border-radius: 25px 25px 10px 10px;
-	border: 0px solid #000000;	
-	margin-top: 10px;
+	border-radius: 25px 25px 0px 0px;
+	-moz-border-radius: 25px 25px 0px 0px;
+	-webkit-border-radius: 25px 25px 0px 0px;
+	border: 0px solid #000000;
 	height: 353px;
 	background: rgba(0, 0, 0, 0.75);
 	margin: auto;
+	margin-top: 4vh;
 	width: 975px;
-	margin-top: 8px; 
 	z-index: 1;
 }
 div.profile-info{
