@@ -47,7 +47,7 @@ $(function(){
 	  
 	  
     });
-
+	/*
 	$('#zoomTweet').dialog({
 		width: 730,
 		modal: true,
@@ -68,6 +68,6 @@ $(function(){
 	$('#zoomTweet').siblings('.ui-dialog-titlebar').remove();
 	$("body").on("click",".ui-widget-overlay",function() {
 		$('#zoomTweet').dialog( "close" );
-	});
+	});*/
 });		
 		

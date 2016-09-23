@@ -36,7 +36,7 @@ $(function(){
 			{
 
 				if(data == 'login'){
-					window.location = 'index.php?act=login&reload=true';
+					window.location = 'index.php';
 				} else {
 					alert(data);
 				}

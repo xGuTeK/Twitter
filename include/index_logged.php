@@ -69,43 +69,7 @@ if(isset($_SESSION["email"])){
 </head>
 
 <body background="./template/bg.jpg">
-<div class="zoomTweet" id="zoomTweet">
-	<div class="zoomTweetHeader">
-		<?php
-		echo '<a href="index.php?profile='.$user->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$user->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>';
-		?>
-		<p class="zoomTweetName"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?></p>
-		<span class="zoomTweetLogin"><?php echo ' @'.$user->getLogin(); ?></span>
-		<?php
-		if ($user->isMyProfile($userid) == false){
-			echo '<span class="tweetZoomFollow"><a href="javascript:void(0);" class="follow" style="height: 23px">Follow '.$user->getTmp('name').'</a></span>';
-		}
-		?>
-		<a href="" name="close" style="left: 555px;">X</a>
-		<hr>
-	</div>
-	<div class="zoomTweetText">
-		<?php
-		echo $tweet->getTweet($user->getTmp('email'), 1)["text"];
-		?>
-	</div>
-	<div class="zoomTweetStats">
-		<div class="shareLikeColumn">
-			<span class="shareText">Podane dalej</span><span class="shareText">Polubienia</span>
-		</div>
-		<div class="sharePhotoColumn">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/729229049302749184/dR3WjBSO_normal.jpg" alt="medo nanna">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777207786354700288/HX7k-DiI_normal.jpg" alt="Mohammed Barzan.">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/715736743933120512/r7_tNJBi_normal.jpg" alt="rosy1319">
-			<img style="width: 27px; height: 27px" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_6_normal.png" alt="Jan Schorling">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/707187549396193284/rp7XrQt4_normal.jpg" alt="Ruby K.">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/3223758993/579d07905d21f75c926f0c049a35915e_normal.jpeg" alt="Corelma Chamorro">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777544943380422656/b1fVbRH2_normal.jpg" alt="Ola">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/774198825493889024/TmEx7FEU_normal.jpg" alt="Hamzea I. Awadat">
-			<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/754585327541559296/R8q5grDD_normal.jpg" alt="José Diego Manzanera">
-		</div>
-	</div>
-</div>
+
 
 	<div class ="editProfilePhoto" id="editProfilePhoto" background="black"></div>
 	<div class="editProfilePhotoConcent">
@@ -165,6 +129,7 @@ if(isset($_SESSION["email"])){
 			<tr>
 				<td>1</td><td>2</td><td>3</td>
 			</tr>
+			<a href="index.php?act=logout">[Wyloguj]</a>
 			<tr>
 				<td>1</td><td>2</td><td>3</td>
 			</tr>			

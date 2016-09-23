@@ -408,7 +408,7 @@ div.tweets{
 .mytweet{
 	margin-bottom: 5px;
 }
-a.tweet{
+a.tweetLink{
 	text-decoration: none;
 }
 a.tweetprofile{
@@ -462,6 +462,9 @@ a.tweetprofile{
 .zoomTweetText{
 	font-size: 26px;
 }
+.tweetZoomFollow{
+	top: 0px;
+}
 .shareLikeColumn {
 	margin-top: 20px;
 	width: 150px;
@@ -478,7 +481,9 @@ span.shareText{
 	margin-top: 20px;
 	width: 150px;
 	height: 40px;
-	border: 0.5px solid gray;
+	border-bottom: 1px solid gray;
+	border-top: 1px solid gray;
+
 	display: block;
 	float: left;
 }
@@ -486,7 +491,8 @@ span.shareText{
 	margin-top: 20px;
 	width: 350px;
 	height: 40px;
-	border: 0.5px solid gray;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	display: block;
 	float: left;
 }
