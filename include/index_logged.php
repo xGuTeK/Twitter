@@ -16,6 +16,7 @@ if(isset($_SESSION["email"])){
 
   <link rel="stylesheet" href="./template/css/style2.css" media="screen" type="text/css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="./template/js/index.js"></script>
   <script src="./template/js/photo_edit.js"></script>
@@ -124,17 +125,10 @@ if(isset($_SESSION["email"])){
 	<h1 class="profile-name"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?><small><?php echo ' @'.$user->getTmp('login'); ?></small></h1>
 	</div>
 	<div class="profile-info">
-		
-		<table width="100%" style="background-color: white; margin-top: 30px;">
-			<tr>
-				<td>1</td><td>2</td><td>3</td>
-			</tr>
-			<a href="index.php?act=logout">[Wyloguj]</a>
-			<tr>
-				<td>1</td><td>2</td><td>3</td>
-			</tr>			
-		</table>
-	
+		<p style="text-align:center; margin-top: 5px;"><?php echo $user->getTmp('desc');?></p>
+		<p style="margin-left: 12px; margin-top: 15px;"><span class="glyphicon glyphicon-map-marker" style="color: gray;"></span> <?php echo $user->getTmp('city'); ?></p>
+		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-link" style="color: gray;"></span> <?php echo $user->getTmp('page'); ?></p>
+		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-calendar" style="color: gray;"></span> <?php echo substr($user->getTmp('createdate'), 0, -9); ?></p>
 	</div>
 	<div class="tweets">
 		<?php if ($user->isMyProfile($userid) == true){ ?>
@@ -145,7 +139,7 @@ if(isset($_SESSION["email"])){
 		    <hr>
 		<a href="tweetid" style="text-decoration: none;">
 		<div class="mytweet">
-		
+
 			<div class="profile-small-photo" style="background-image: url('./template/profile p.jpg'); background-size: contain; background-repeat: no-repeat;"></div>
 			<div><p style="color:black; left: 5px;"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?><small><?php echo ' @'.$user->getLogin(); ?></small>         data</p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend erat nec nisl facilisis, quis fermentum nulla malesuada. Aenean at</div>
 			
