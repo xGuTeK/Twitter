@@ -12,8 +12,8 @@ if(isset($_GET['act']) && $_GET['act'] == 'showTweet'){
         if(isset($_GET['tweetID']) && ($_GET['tweetID'] >0)){
             $userID = $db->connect()->escape_string($_GET['userID']);
             $tweetID = $db->connect()->escape_string($_GET['tweetID']);
-           $tweet->showTweet($userID, $tweetID);
-
+            $tweet->showTweet($userID, $tweetID);
+            $comment->getComments($tweetID);
         }
     }
 }
