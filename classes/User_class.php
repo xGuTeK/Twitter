@@ -71,26 +71,34 @@ class User extends DB {
 
         }
     }
-    public function checkProfileInfo($userid){
-        $userid = $this->connect()->escape_string($userid);
-        
-        $sql = "SELECT `name FROM `users` WHERE `id`='$userid';";
-        
+    function checkIfLoginExist($login)
+    {
+        $login = $this->connect()->escape_string($login);
+
+        $sql = "SELECT `id` FROM `users` WHERE `login`='$login'";
         $result = $this->connect()->query($sql);
-        
-        if ($result->num_rows < 0){
-           
-            $this->registerNextStep($userid);
+
+        if ($result->num_rows > 0) {
+
+            return true;
         }
-        
+
+        return false;
     }
-    public function registerNextStep($userid){
-        $userid = $this->connect()->escape_string($userid);
-        
-        
-        
-        
+    public function registerNextStep($userID, $login, $name, $surname){
+        $userID = $this->connect()->escape_string($userID);
+        $login = $this->connect()->escape_string($login);
+        $name = $this->connect()->escape_string($name);
+        $surname = $this->connect()->escape_string($surname);
+
+        if($this->checkIfLoginExist($login) == false) {
+            $sql = "UPDATE `users` SET `login`='$login', `name`='$name', `surname`='$surname' WHERE `id`='$userID';";
+            $result = $this->connect()->query($sql);
+        } else {
+            echo 'Login already exists in database.';
+        }
     }
+
     public function register($email, $pwd, $pwd2){
         if ($pwd === $pwd2){ 
             if((strlen($pwd) >= 4) && (strlen($pwd) <= 10)){
@@ -134,12 +142,7 @@ class User extends DB {
         }
         
     }
-    
-    public function autoLogin(){
-        
-        $this->login($_SESSION['email'], $_SESSION['pwd']);
-    }
-    
+
     public function logout(){
         $_SESSION['email'] = null;
         $_SESSION['pwd'] = null;
