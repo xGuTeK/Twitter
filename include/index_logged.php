@@ -1,6 +1,7 @@
 <?php
 
 if(isset($_SESSION["email"])){
+
 	?>
 	
 <!DOCTYPE html>
@@ -22,8 +23,13 @@ if(isset($_SESSION["email"])){
   <script src="./template/js/photo_edit.js"></script>
 	<script src="./template/js/tweet.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="./template/js/jquery.colorbox-min.js"></script> 
-   <?php if ($user->isMyProfile($userid) == false){ ?>
+   <script src="./template/js/jquery.colorbox-min.js"></script>
+   <?php if ($user->isMyProfile($userid) == false){
+
+	   if(empty($user->getTmp('login'))){
+		   echo '<script src="template/js/register_nextstep.js"></script>';
+	   }
+	   ?>
    <script>
    $(function(){
        <?php

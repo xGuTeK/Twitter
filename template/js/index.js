@@ -47,27 +47,8 @@ $(function(){
 	  
 	  
     });
-	/*
-	$('#zoomTweet').dialog({
-		width: 730,
-		modal: true,
-		resizable: false,
-		draggable: false,
-		dialogClass: 'ui-dialog-osx',
-		open:
-			function (event, ui) {
-			$(".ui-widget-overlay").css({
-				opacity: 0.75,
-				filter: "Alpha(Opacity=0)",
-				backgroundColor: "black"
-			});
 
-		},
-		position: { my: "center top", at: "center top+75"}
-	});
-	$('#zoomTweet').siblings('.ui-dialog-titlebar').remove();
-	$("body").on("click",".ui-widget-overlay",function() {
-		$('#zoomTweet').dialog( "close" );
-	});*/
+
+
 });		
 		

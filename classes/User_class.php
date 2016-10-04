@@ -357,7 +357,7 @@ class User extends DB {
 		$this->tmp = [];
 		
         //Profile Info
-        $sql = "SELECT `id`, `login`, `name`, `surname` FROM `users` WHERE `email`='$email';";
+        $sql = "SELECT `id`, `login`, `name`, `surname`, `city`, `page`, `description`, `createdate` FROM `users` WHERE `email`='$email';";
 
         $result = $this->connect()->query($sql);
         
@@ -376,6 +376,11 @@ class User extends DB {
 		$tmp['name'] = $row["name"];
 		$tmp['surname'] = $row["surname"];
 		$tmp['email'] = $email;
+        $tmp['desc'] = $row['description'];
+        $tmp['city'] = $row['city'];
+        $tmp['page'] = $row['page'];
+        $tmp['createdate'] = $row['createdate'];
+
 		
         //Profile Info Stats
         

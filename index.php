@@ -3,12 +3,13 @@ session_start();
 require_once 'classes\MysqlConn_class.php';
 require_once 'classes\User_class.php';
 require_once 'classes\Tweet_class.php';
+require_once 'classes\Comment_class.php';
 
 $db = new DB();
 $user = new User();
 
 if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
-    //$user->login('gutek@gmail.com', '9bc34549d565d9505b287de0cd20ac77be1d3f2c');
+
 	
 	if(isset($_GET["act"])){
 		switch($_GET["act"]){
@@ -34,6 +35,7 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
 
     $user->loadDataFromDb($_SESSION["email"], "login");
     $tweet = new Tweet();
+    $comment = new Comments();
 	/*if($_GET['act'] != 'tweet'){
         include 'include\index_logged.php';
     }*/
@@ -43,11 +45,18 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
 
     } else {
         $userid = $user->getLogin();
-    }
 
+        if(!$user->getLogin()){
+
+        }
+    }
 
 	if(isset($_GET["act"])){
 		switch($_GET["act"]){
+            case 'checkLogin':
+            case "registerStepTwo":
+                include_once 'include\register_steptwo.php';
+                break;
 			case "editphoto":
                 include 'include\index_logged.php';
 				include_once 'include\edit_profile_photo.php';
@@ -71,7 +80,5 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
         include 'include\index_logged.php';
     }
 	
-	
 }
-//session_destroy();
 $db->disconnect();
