@@ -94,8 +94,11 @@ class User extends DB {
         if($this->checkIfLoginExist($login) == false) {
             $sql = "UPDATE `users` SET `login`='$login', `name`='$name', `surname`='$surname' WHERE `id`='$userID';";
             $result = $this->connect()->query($sql);
+
+            return true;
+
         } else {
-            echo 'Login already exists in database.';
+            return false;
         }
     }
 

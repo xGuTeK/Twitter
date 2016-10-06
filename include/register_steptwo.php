@@ -13,12 +13,12 @@ if(!$user->getLogin() && $_GET['act'] != 'checkLogin'){
                     $('#loginCheckImg').css('display', 'block');
                     if (response == 'OK.') {
                         login.css('border', '2px solid green');
-                        $("#send").disabled = false;
+                        //$("#send").disabled = false;
                         $('#loginCheckImg').attr('src', 'template/img/icons/Success-icon.png');
                     }
                     if (response == 'Login already exist.') {
                         login.css('border', '2px solid red');
-                        $("#send").disabled = true;
+                        //$("#send").disabled = true;
                         $('#loginCheckImg').attr('src', 'template/img/icons/Error-icon.png');
                     }
                 }
@@ -26,9 +26,31 @@ if(!$user->getLogin() && $_GET['act'] != 'checkLogin'){
         } else {
             $('#loginCheckImg').css('display', 'none');
             login.css('border', '');
-            $('#send').prop("disabled", true);
+            //$('#send').prop("disabled", true);
         }
     }
+    $('#registerStepTwoForm').submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var data = form.serializeArray();
+        $.ajax({
+            url: "index.php?act=registerNextStepUpdate",// your username checker url
+            type: "POST",
+            data: data,
+            success: function (response) {
+                if(response == 0){
+                    alert('Login already exists in database.');
+                }
+                if(response == 1){
+                    location.reload();
+                }
+                if(response != 0 || response != 1){
+                    alert(response);
+                }
+            }
+        });
+    });
+
 </script>
 <?php
     echo '<div class="registerStep2">
@@ -37,7 +59,7 @@ if(!$user->getLogin() && $_GET['act'] != 'checkLogin'){
     <input type="text" name="Login" placeholder="Login" id="login" onkeyup="checkLogin(); return false;" maxlength="12" required /><img id="loginCheckImg" src="" style="display: none; float: left;">
     <input type="text" name="Name" placeholder="Name" maxlength="20" required/>
     <input type="text" name="Surname" placeholder="Surname" maxlength="20" required/>
-    <input type="button" value="OK" id="send" />
+    <input type="submit" value="OK" id="send" />
   </form>
 </div>';
 }
@@ -52,6 +74,7 @@ if($_GET['act'] == 'checkLogin'){
 
         }
     }
-
-
 }
+
+
+

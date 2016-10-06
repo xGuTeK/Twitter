@@ -53,6 +53,9 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
 
 	if(isset($_GET["act"])){
 		switch($_GET["act"]){
+            case 'registerNextStepUpdate':
+                include_once 'include\register_nextStepUpdate.php';
+                break;
             case 'checkLogin':
             case "registerStepTwo":
                 include_once 'include\register_steptwo.php';
