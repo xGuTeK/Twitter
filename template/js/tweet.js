@@ -21,11 +21,11 @@ $(function(){
 
 
 	
-	function ConfirmDialog(message, form){
+	function ConfirmDialog(message, form , method){
     $('<div></div>').appendTo('body')
                     .html('<div><h3>'+message+'</h3></div>')
                     .dialog({
-                        modal: true, title: 'Are You sure to confirm this tweet?', zIndex: 10000, autoOpen: true,
+                        modal: true, title: 'Are You sure to confirm this '+method+'?', zIndex: 10000, autoOpen: true,
                         width: 'auto', resizable: false,
                         buttons: {
                             Yes: function () {
@@ -33,7 +33,7 @@ $(function(){
                                 // $(obj).parents('.Parent').remove();
 
 								$.ajax({
-									url: "index.php?act=tweet",
+									url: "index.php?act=" + method,
 									type: "POST",
 									data: new FormData(form),
 									contentType: false,
@@ -61,7 +61,7 @@ $(function(){
 		e.preventDefault();
 		var text = $('.textarea-tweet').val();
 		if(text.length >= 10 && text.length <= 140 ) {
-			ConfirmDialog(text, e.target);
+			ConfirmDialog(text, e.target, 'tweet');
 		}
 	});
 
@@ -101,8 +101,10 @@ $(function(){
 	}
 
 
-	$('.tweetLink').click(function(e){
+	$('.TweetContent').click(function(e){
 		zoomTweet(this.getAttribute('data-userID'), this.getAttribute('data-tweetID'));
 	})
+
+
 
 });
