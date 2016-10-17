@@ -15,29 +15,7 @@ $(function(){
 	});			
 	$('.editProfilePhoto').hide();
 	$('.editProfilePhotoConcent').hide();
-	/*
-	$('*').click(function(e) {
-		
-    	if((e.target.className != 'editProfilePhotoConcent') || (e.target.id != '#file') || (e.target.id != '.editPhotoLink') || (e.target.id != null) || (e.target.className != 'editProfilePhoto')) {
-    		$('.editProfilePhotoConcent').hide();
-			$('.editProfilePhoto').hide();
-		} else {
-			console.log('foo');
-		}
 
-    });
-
-	$('.container').click(function() {
-		$('#editPhotoLink').click(function(){
-			return false;
-		});
-		$('.editProfilePhotoConcent').click(function(){
-			return false;
-		});	
-		
-
-		$('.editProfilePhotoConcent').fadeOut('slow');
-	});*/
 	
     $( "#editPhotoLink" ).on( "click", function(event) {
 	  event.preventDefault(); 

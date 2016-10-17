@@ -29,7 +29,7 @@ if(isset($_SESSION["email"])){
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <?php if ($user->isMyProfile($userid) == false){
 
-	   if(empty($user->getTmp('login'))){
+	   if(empty($user->getLogin())){
 		   echo '<script src="template/js/register_nextstep.js"></script>';
 	   }
 	   ?>
@@ -40,7 +40,7 @@ if(isset($_SESSION["email"])){
        ?>
            $('a.follow').toggleClass('followed');
            $('a.follow').text('Followed');
-           $('ul li:last-child').html('<?php echo $user->getTmp('followers'); ?><span>Followers</span>');
+           $('#FollowersCount').html('<?php echo $user->getTmp('followers'); ?><span>Followers</span>');
 
        <?php
       }
@@ -55,7 +55,7 @@ if(isset($_SESSION["email"])){
                 success: function()
                 {
 					$('a.follow').text('Followed');
-                    $('ul li:last-child').html('<?php echo $user->getTmp('followers')+1; ?><span>Followers</span>');
+                    $('#FollowersCount').html('<?php echo $user->getTmp('followers')+1; ?><span>Followers</span>');
                 }
             });
 
@@ -66,7 +66,7 @@ if(isset($_SESSION["email"])){
 				success: function()
 				{
 					$('a.follow').text('Follow <?php echo $user->getTmp("name"); ?>');
-					$('ul li:last-child').html('<?php echo $user->getTmp('followers'); ?><span>Followers</span>');
+					$('#FollowersCount').html('<?php echo $user->getTmp('followers'); ?><span>Followers</span>');
 				}
 			});
 		}
@@ -133,9 +133,9 @@ if(isset($_SESSION["email"])){
 		
 		<div class="profile-stats">
 			<ul id="profileStatsUL">
-				<li><?php echo $user->getTmp('tweets'); ?> <span>Tweets</span></li>
-				<li><?php echo $user->getTmp('following') ?> <span>Following</span></li>
-				<li><?php echo $user->getTmp('followers'); ?><span>Followers</span></li>
+				<li id="TweetCount"><?php echo $user->getTmp('tweets'); ?> <span>Tweets</span></li>
+				<li id="FollowingCount"><?php echo $user->getTmp('following') ?> <span>Following</span></li>
+				<li id="FollowersCount"><?php echo $user->getTmp('followers'); ?><span>Followers</span></li>
 			</ul>
 			<?php
 		
