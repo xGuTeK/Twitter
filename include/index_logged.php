@@ -12,18 +12,21 @@ if(isset($_SESSION["email"])){
   <meta charset="UTF-8">
 
   <title></title>
-
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
   <link rel="stylesheet" href="./template/css/reset.css">
 
   <link rel="stylesheet" href="./template/css/style2.css" media="screen" type="text/css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+  <link rel="stylesheet" href="./template/css/bootstrap.css" media="screen" type="text/css" />
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="./template/js/index.js"></script>
   <script src="./template/js/photo_edit.js"></script>
 	<script src="./template/js/tweet.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src="./template/js/jquery.colorbox-min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <?php if ($user->isMyProfile($userid) == false){
 
 	   if(empty($user->getTmp('login'))){
@@ -77,7 +80,7 @@ if(isset($_SESSION["email"])){
 
 <body background="./template/bg.jpg">
 
-
+<!--
 	<div class ="editProfilePhoto" id="editProfilePhoto" background="black"></div>
 	<div class="editProfilePhotoConcent">
 		<h2 style="text-align: center">Change profile photo</h2>
@@ -93,14 +96,31 @@ if(isset($_SESSION["email"])){
 		</form>
 	</div>
 	<h4 id='editProfilePhotoLoading' >loading..</h4>
-	<div id="editProfilePhotoMessage"></div>
+	<div id="editProfilePhotoMessage"></div>-->
 
   <!--<h1><img src="" /> <small>test</small></h1>-->
-	<div class="nav_top">Twitter</div>
+	<div class="nav_top">Twitter
+
+	<div class="nav_profile_menu">
+
+		<div class="dropdown" style="">
+			<button class="profile-small nav_profile_button" type="button" id="menu1" data-toggle="dropdown" style="background-image: url('<?php echo './upload/profile/'.$user->getProfileImage(); ?>'); background-size: cover; background-repeat: no-repeat; height: 30px; width: 30px; position: relative; top: 10%;"></button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?profile=<?php echo $user->getLogin(); ?>"><i class="glyphicon glyphicon-user" style=""></i>Zobacz profil</a></li>
+				<li role="presentation" class="divider"></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="glyphicon glyphicon-envelope"></i>Wiadomości</a></li>
+				<li role="presentation" class="divider"></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="glyphicon glyphicon-cog"></i>Ustawienia</a></li>
+				<li role="presentation" class="divider"></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?act=logout"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
+			</ul>
+		</div>
+	</div>
+
+	</div>
 	<div class="container">
 	<div class="profile">
 		<div class="profile-banner">
-			<!--<img class="profile-background" width="975" height="300" src="./template/pgackground.jpg" alt="Profile banner" />-->
 			<img class="profile-background" width="975" height="300" src="<?php echo './upload/background/'.$user->getTmp('background'); ?>" alt="Profile banner" />
 		</div>
 		<div class="profile-picture" style="background-image: url('<?php echo './upload/profile/'.$user->getTmp('photo'); ?>')">
@@ -142,21 +162,7 @@ if(isset($_SESSION["email"])){
 		        <textarea class="textarea-tweet" name="newTweetText"></textarea><br><span class="textarea-count"></span>
 		        <input class="tweets-mesageboxButton" type="submit" value="Tweet">
             </form>
-		    <hr>
-		<a href="tweetid" style="text-decoration: none;">
-		<div class="mytweet">
 
-			<div class="profile-small-photo" style="background-image: url('./template/profile p.jpg'); background-size: contain; background-repeat: no-repeat;"></div>
-			<div><p style="color:black; left: 5px;"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?><small><?php echo ' @'.$user->getLogin(); ?></small>         data</p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eleifend erat nec nisl facilisis, quis fermentum nulla malesuada. Aenean at</div>
-			
-		</div></a>
-        <div class="mytweetButtons">
-            <img src="./template/img/reply-action_0.png" width="20" height="20">
-            <img src="./template/img/retweet-action.png" width="20" height="20">
-            <img src="./template/img/heart.png" width="20" height="20">
-        </div>
-
-		<hr style="position: relative; bottom: 0px; clear: both;">
 		<?php
 			$tweet->showTweets($user->getTmp('email'));
 
@@ -165,9 +171,7 @@ if(isset($_SESSION["email"])){
 		} ?>
 
 	</div>
-  <!--<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 
-  <script src="js/index.js"></script>-->
 <div class="footer"><p style="font-width: 40px">by Adrian Tracz</p></div>
 </body>
 

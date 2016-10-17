@@ -13,7 +13,6 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"]) ){ //&& $user->isMyPr
 		$file["type"] = $_FILES["editProfilePhotoFile"]["type"];
 		$file["size"] = $_FILES["editProfilePhotoFile"]["size"];
 		$file["error"] = $_FILES["editProfilePhotoFile"]["error"];
-		$_FILES["editProfilePhotoFile"]["name"] = 'test.jpg';	
 		
 		$uploadDir = $_SERVER["DOCUMENT_ROOT"]."/Twitter/upload/";
 		$uploadProfileDir = $_SERVER["DOCUMENT_ROOT"]."/Twitter/upload/profile/";
@@ -34,13 +33,14 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"]) ){ //&& $user->isMyPr
 					echo $_FILES["editProfilePhotoFile"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
 				} else {
 					$sourcePath = $_FILES['editProfilePhotoFile']['tmp_name']; // Storing source path of the file in a variable
-					$targetPath = $uploadProfileDir . $_FILES["editProfilePhotoFile"]["name"]; // Target path where file is to be stored
+					$targetPath = $uploadProfileDir . $file['name']; // Target path where file is to be stored
 						move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
-						echo "<span id='success'>Image Uploaded Successfully...!!</span><br/>";
+                /*
 						echo "<br/><b>File Name:</b> " . $_FILES["editProfilePhotoFile"]["name"] . "<br>";
 						echo "<b>Type:</b> " . $_FILES["editProfilePhotoFile"]["type"] . "<br>";
 						echo "<b>Size:</b> " . ($_FILES["editProfilePhotoFile"]["size"] / 1024) . " kB<br>";
 						echo "<b>Temp file:</b> " . $_FILES["editProfilePhotoFile"]["tmp_name"] . "<br>";
+                */
 				}
 			}
 		} else {

@@ -53,6 +53,36 @@ class Tweet extends User{
         }    
     }
 
+    public function getTimeDifference($time) {
+        //Let's set the current time
+        $currentTime = date('Y-m-d H:i:s');
+        $toTime = strtotime($currentTime);
+
+        //And the time the notification was set
+        $fromTime = strtotime($time);
+
+        //Now calc the difference between the two
+        $timeDiff = floor(abs($toTime - $fromTime) / 60);
+
+        //Now we need find out whether or not the time difference needs to be in
+        //minutes, hours, or days
+        if ($timeDiff < 2) {
+            $timeDiff = "Teraz";
+        } elseif ($timeDiff > 2 && $timeDiff < 60) {
+            $timeDiff = floor(abs($timeDiff)) . " minut temu";
+        } elseif ($timeDiff > 60 && $timeDiff < 120) {
+            $timeDiff = floor(abs($timeDiff / 60)) . " godzine temu";
+        } elseif ($timeDiff < 1440) {
+            $timeDiff = floor(abs($timeDiff / 60)) . " godzin temu";
+        } elseif ($timeDiff > 1440 && $timeDiff < 2880) {
+            $timeDiff = floor(abs($timeDiff / 1440)) . " dzień temu";
+        } elseif ($timeDiff > 2880) {
+            $timeDiff = floor(abs($timeDiff / 1440)) . " dni temu";
+        }
+
+        return $timeDiff;
+    }
+
     public function userTweetCountUpdate($userId, $option)
     {
         $userId = $this->connect()->escape_string($userId);
@@ -108,7 +138,7 @@ class Tweet extends User{
         
         if (!empty($user_id)) {
             
-            $sql = "SELECT * FROM `tweets` WHERE `user_id` = '$user_id'"; //DODAC SORTOWANIE OD NAJNOWSZEGO
+            $sql = "SELECT * FROM `tweets` WHERE `user_id` = '$user_id' ORDER BY date DESC";
             $result = $this->connect()->query($sql);
             
             if($result->num_rows > 0){
@@ -157,15 +187,7 @@ class Tweet extends User{
 		<span class="shareText">Podane dalej</span><span class="shareText">Polubienia</span>
 	</div>
 	<div class="sharePhotoColumn">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/729229049302749184/dR3WjBSO_normal.jpg" alt="medo nanna">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777207786354700288/HX7k-DiI_normal.jpg" alt="Mohammed Barzan.">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/715736743933120512/r7_tNJBi_normal.jpg" alt="rosy1319">
-		<img style="width: 27px; height: 27px" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_6_normal.png" alt="Jan Schorling">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/707187549396193284/rp7XrQt4_normal.jpg" alt="Ruby K.">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/3223758993/579d07905d21f75c926f0c049a35915e_normal.jpeg" alt="Corelma Chamorro">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/777544943380422656/b1fVbRH2_normal.jpg" alt="Ola">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/774198825493889024/TmEx7FEU_normal.jpg" alt="Hamzea I. Awadat">
-		<img style="width: 27px; height: 27px" src="https://pbs.twimg.com/profile_images/754585327541559296/R8q5grDD_normal.jpg" alt="José Diego Manzanera">
+
 	</div>
 </div>';
 
@@ -180,22 +202,9 @@ class Tweet extends User{
             if(!empty($this->getTweets($user_id))){
                 $this->loadDataFromDb($user_id);
 
-                $lastTweet = end($this->getTweets($user_id));
+                include_once 'include\views\tweet_list.php';
 
-                foreach($this->getTweets($user_id) as $tweet){
-                    echo '
-						<div class="mytweet" id="'.$tweet['tweetID'].'" style="clear:both; ">
-							<a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile"><div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div></a>
-							<a class="tweetLink" id="zoomTweetLink" href="javascript:void(0);" data-userID="'.$user_id.'" data-tweetID="'.$tweet['tweetID'].'"><div>
-								<p style="color:black; left: 5px; font-width: bold; width:100%;">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'<small>@'.$this->getTmp('login').'</small></p><div style="align: right;">'.$tweet["date"].'</div>
-								<p>'.$tweet["text"].'</p>
-						    </div></a>
-						</div>';
-                    if($tweet['tweetID'] != $lastTweet['tweetID']) {
-                        echo '<hr style="position: relative; bottom: 0px; margin-top: 3px; clear:both;">';
-                    }
-                }
-            } else { // brak tweetow
+            } else {
                 
                 echo "No tweets"; 
             }  

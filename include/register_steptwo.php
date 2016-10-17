@@ -6,7 +6,7 @@ if(!$user->getLogin() && $_GET['act'] != 'checkLogin'){
         var login = $('#login');
         if(login.val().length >= 4) {
             $.ajax({
-                url: "index.php?act=checkLogin",// your username checker url
+                url: "index.php?act=checkLogin",
                 type: "POST",
                 data: {login: login.val()},
                 success: function (response) {
@@ -34,7 +34,7 @@ if(!$user->getLogin() && $_GET['act'] != 'checkLogin'){
         var form = $(this);
         var data = form.serializeArray();
         $.ajax({
-            url: "index.php?act=registerNextStepUpdate",// your username checker url
+            url: "index.php?act=registerNextStepUpdate",
             type: "POST",
             data: data,
             success: function (response) {

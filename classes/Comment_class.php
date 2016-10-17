@@ -10,7 +10,7 @@ class Comments extends Tweet
 
 
     function setCommentText($commentText) {
-        if( (strlen($commentText) >= $this->commentMinSize) && (strlen($commentText) <= $this->commentMaxSize) ){
+        if( (strlen($commentText) >= self::commentMinSize) && (strlen($commentText) <= self::commentMaxSize) ){
             $this->commentText = $commentText;
             
             return true;
@@ -23,11 +23,11 @@ class Comments extends Tweet
         if ($this->setUser_id($user_id) == true) {
             if ($this->setCommentText($commentText) == true) {
 
-                $sql = "INSERT INTO `comments` (`tweet_id`, `user_id`, `text`) VALUES ('$this->getTweetID()', $this->getUser_id()', '$this->getText()');";
+                $sql = "INSERT INTO `comments` (`tweet_id`, `user_id`, `comment_text`, `comment_date`) VALUES ('$tweet_id', '$user_id', '$commentText', '" . date('Y-m-d H:i:s') . "');";
                 $result = $this->connect()->query($sql);
-                
+
             } else {
-                echo 'Comment must contain between '.$this->commentMinSize.' and '.$this->commentMaxSize.' characters.';
+                echo 'Comment must contain between '.self::commentMinSize.' and '.self::commentMaxSize.' characters.';
             }
         } else {
             echo "DB ERROR";
@@ -43,14 +43,7 @@ class Comments extends Tweet
 
             $result = $this->connect()->query($sql);
 
-            if($result->num_rows > 0){
-                include('./include/views/comments.php');
-
-            } else {
-
-                echo '<p>There are no comments.</p>';
-                
-            }
+            include('./include/views/comments.php');
 
         }
 
