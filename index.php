@@ -61,11 +61,9 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
                 include_once 'include\register_steptwo.php';
                 break;
 			case "editphoto":
-				include_once 'include\views\edit_profile_photo.php';
+                include 'include\index_logged.php';
+				include_once 'include\edit_profile_photo.php';
 				break;
-            case "photoupload":
-                include_once 'include\edit_profile_photo.php';
-                break;
             case 'tweet':
                 include_once 'include\tweet.php';
                 break;
@@ -76,14 +74,8 @@ if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
             case 'follow':
                 include_once 'include\follow.php';
                 break;
-            case 'newReply':
-                include_once 'include\newReply.php';
-                break;
-            case 'search':
-                include_once 'include\search.php';
-                break;
             case 'logout':
-                $user->logout();
+                session_destroy();
                 header("Location: index.php");
                 break;
 		}
