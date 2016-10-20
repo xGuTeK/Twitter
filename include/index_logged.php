@@ -11,22 +11,27 @@ if(isset($_SESSION["email"])){
 
   <meta charset="UTF-8">
 
-  <title></title>
-	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <title><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')).' (@'.$user->getTmp('login').') | Twitter'; ?></title>
   <link rel="stylesheet" href="./template/css/reset.css">
-
   <link rel="stylesheet" href="./template/css/style2.css" media="screen" type="text/css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
   <link rel="stylesheet" href="./template/css/bootstrap.css" media="screen" type="text/css" />
+  <link rel="stylesheet" href="./template/css/tooltip.css" media="screen" type="text/css" />
+
+
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="./template/js/index.js"></script>
   <script src="./template/js/photo_edit.js"></script>
+
 	<script src="./template/js/tweet.js"></script>
+	<script src="./template/js/search.js"></script>
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="./template/js/jquery.colorbox-min.js"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="./template/js/tooltip.js"></script>
+
    <?php if ($user->isMyProfile($userid) == false){
 
 	   if(empty($user->getLogin())){
@@ -35,6 +40,7 @@ if(isset($_SESSION["email"])){
 	   ?>
    <script>
    $(function(){
+
        <?php
        if($user->userFollow($user->convertToUserId($_SESSION["email"], 'email'), $user->convertToUserId($userid), "login") == true){
        ?>
@@ -71,11 +77,15 @@ if(isset($_SESSION["email"])){
 			});
 		}
 	});
+
 });
    </script>
    <?php }?>
   <!--<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"</script>-->
 
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body background="./template/bg.jpg">
@@ -100,10 +110,18 @@ if(isset($_SESSION["email"])){
 
   <!--<h1><img src="" /> <small>test</small></h1>-->
 	<div class="nav_top">Twitter
-
+	<div class="nav_search">
+		<form id="searchForm">
+				<div class="nav_search_field">
+					<input type="text" id="searchInput" placeholder="Enter your search" maxlength="20" onkeyup="lookup(this.value);"/>
+				</div>
+				<input type="submit" id="searchSubmit" value="" />
+					<div id="suggestions"></div>
+		</form>
+	</div>
 	<div class="nav_profile_menu">
 
-		<div class="dropdown" style="">
+		<div class="dropdown" style="" title="Profil i ustawienia">
 			<button class="profile-small nav_profile_button" type="button" id="menu1" data-toggle="dropdown" style="background-image: url('<?php echo './upload/profile/'.$user->getProfileImage(); ?>'); background-size: cover; background-repeat: no-repeat; height: 30px; width: 30px; position: relative; top: 10%;"></button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 				<li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?profile=<?php echo $user->getLogin(); ?>"><i class="glyphicon glyphicon-user" style=""></i>Zobacz profil</a></li>
@@ -133,9 +151,9 @@ if(isset($_SESSION["email"])){
 		
 		<div class="profile-stats">
 			<ul id="profileStatsUL">
-				<li id="TweetCount"><?php echo $user->getTmp('tweets'); ?> <span>Tweets</span></li>
-				<li id="FollowingCount"><?php echo $user->getTmp('following') ?> <span>Following</span></li>
-				<li id="FollowersCount"><?php echo $user->getTmp('followers'); ?><span>Followers</span></li>
+				<li id="TweetCount"><?php echo $user->getTmp('tweets'); ?> <span>Tweety</span></li>
+				<li id="FollowingCount"><?php echo $user->getTmp('following') ?> <span>Obserwowani</span></li>
+				<li id="FollowersCount"><?php echo $user->getTmp('followers'); ?><span>Obserwujący</span></li>
 			</ul>
 			<?php
 		

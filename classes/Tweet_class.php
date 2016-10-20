@@ -66,14 +66,16 @@ class Tweet extends User{
 
         //Now we need find out whether or not the time difference needs to be in
         //minutes, hours, or days
-        if ($timeDiff < 2) {
+        if ($timeDiff < 1) {
             $timeDiff = "Teraz";
-        } elseif ($timeDiff > 2 && $timeDiff < 60) {
+        } elseif (($timeDiff > 1 && $timeDiff <= 4) || ($timeDiff >= 21 && $timeDiff <= 24) || ($timeDiff >= 32 && $timeDiff <= 34) || ($timeDiff >= 42 && $timeDiff <= 44) || ($timeDiff >= 52 && $timeDiff <= 54)){
+            $timeDiff = floor(abs($timeDiff)) . " minuty temu";
+        } elseif ($timeDiff > 4 && $timeDiff < 60) {
             $timeDiff = floor(abs($timeDiff)) . " minut temu";
-        } elseif ($timeDiff > 60 && $timeDiff < 120) {
+        } elseif ($timeDiff >= 60 && $timeDiff < 120) {
             $timeDiff = floor(abs($timeDiff / 60)) . " godzine temu";
         } elseif ($timeDiff < 1440) {
-            $timeDiff = floor(abs($timeDiff / 60)) . " godzin temu";
+            $timeDiff = floor(abs($timeDiff / 60)) . " godziny temu";
         } elseif ($timeDiff > 1440 && $timeDiff < 2880) {
             $timeDiff = floor(abs($timeDiff / 1440)) . " dzień temu";
         } elseif ($timeDiff > 2880) {
@@ -138,7 +140,7 @@ class Tweet extends User{
         
         if (!empty($user_id)) {
             
-            $sql = "SELECT * FROM `tweets` WHERE `user_id` = '$user_id' ORDER BY date DESC";
+            $sql = "SELECT * FROM `tweets` WHERE `user_id` = '$user_id' ORDER BY `date` DESC";
             $result = $this->connect()->query($sql);
             
             if($result->num_rows > 0){

@@ -267,6 +267,15 @@ class User extends DB {
                 }
         }
 	}
+	function checkIfIsMyProfile(){
+	    echo parent::getLogin();
+	    if(parent::getLogin() == $this->getTmp('login')){
+
+	        return true;
+        }
+
+        return false;
+    }
 	
 	public function convertToUserId($value, $type = "login")
 	{
@@ -298,6 +307,18 @@ class User extends DB {
 			return $row["email"];
 		} 	
 	}
+	public function covertEmailToLogin($email){
+        if(!empty($email)){
+            $email =  $this->connect()->escape_string($email);
+
+            $sql = "SELECT `login` FROM `users` WHERE `email`='$email';";
+            $result = $this->connect()->query($sql);
+
+            $row = $result->fetch_array();
+
+            return $row["login"];
+        }
+    }
 
     public function userStats($user_id, $columnName, $option = '+'){
 	    $user_id = $this->connect()->escape_string($user_id);
