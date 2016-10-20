@@ -1,9 +1,8 @@
 <?php
 
-if(isset($_SESSION["email"])){
+if($user->isLogged() != false){
 
-	?>
-	
+?>
 <!DOCTYPE html>
 <html>
 
@@ -20,24 +19,23 @@ if(isset($_SESSION["email"])){
 
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <script src="./template/js/index.js"></script>
   <script src="./template/js/photo_edit.js"></script>
+  <script src="./template/js/tweet.js"></script>
+  <script src="./template/js/search.js"></script>
+  <script src="./template/js/tooltip.js"></script>
 
-	<script src="./template/js/tweet.js"></script>
-	<script src="./template/js/search.js"></script>
+<?php
 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  if(empty($user->getLogin())){
+	echo '<script src="template/js/register_nextstep.js"></script>';
+  }
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<script src="./template/js/tooltip.js"></script>
-
-   <?php if ($user->isMyProfile($userid) == false){
-
-	   if(empty($user->getLogin())){
-		   echo '<script src="template/js/register_nextstep.js"></script>';
-	   }
-	   ?>
+  if ($user->checkIfIsMyProfile() == false){
+?>
    <script>
    $(function(){
 
@@ -81,9 +79,6 @@ if(isset($_SESSION["email"])){
 });
    </script>
    <?php }?>
-  <!--<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"</script>-->
-
-
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -91,110 +86,76 @@ if(isset($_SESSION["email"])){
 <body background="./template/bg.jpg">
 
 <!--
-	<div class ="editProfilePhoto" id="editProfilePhoto" background="black"></div>
-	<div class="editProfilePhotoConcent">
-		<h2 style="text-align: center">Change profile photo</h2>
-		<hr>
-		<form id="editProfilePhotoForm" action="" method="post" enctype="multipart/form-data">
-			<div id="editProfilePhotoPreview"><img id="editProfilePhotoPreviewImage" src="./template/img/profile/noimage.jpg" /></div>
-			<hr id="line">
-			<div id="editProfilePhotoSelectImage">
-				<label>Select Your Image
-				<input type="file" name="editProfilePhotoFile" id="file" required /></label>
-				<input type="submit" value="Upload" class="editProfilePhotoSubmit" />
-			</div>
-		</form>
-	</div>
 	<h4 id='editProfilePhotoLoading' >loading..</h4>
 	<div id="editProfilePhotoMessage"></div>-->
 
-  <!--<h1><img src="" /> <small>test</small></h1>-->
 	<div class="nav_top">Twitter
-	<div class="nav_search">
-		<form id="searchForm">
-				<div class="nav_search_field">
-					<input type="text" id="searchInput" placeholder="Enter your search" maxlength="20" onkeyup="lookup(this.value);"/>
-				</div>
-				<input type="submit" id="searchSubmit" value="" />
-					<div id="suggestions"></div>
-		</form>
-	</div>
-	<div class="nav_profile_menu">
-
-		<div class="dropdown" style="" title="Profil i ustawienia">
-			<button class="profile-small nav_profile_button" type="button" id="menu1" data-toggle="dropdown" style="background-image: url('<?php echo './upload/profile/'.$user->getProfileImage(); ?>'); background-size: cover; background-repeat: no-repeat; height: 30px; width: 30px; position: relative; top: 10%;"></button>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?profile=<?php echo $user->getLogin(); ?>"><i class="glyphicon glyphicon-user" style=""></i>Zobacz profil</a></li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="glyphicon glyphicon-envelope"></i>Wiadomości</a></li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="glyphicon glyphicon-cog"></i>Ustawienia</a></li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?act=logout"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
-			</ul>
-		</div>
+		<?php
+			include_once 'include\views\nav_top.php';
+		?>
 	</div>
 
-	</div>
 	<div class="container">
-	<div class="profile">
-		<div class="profile-banner">
-			<img class="profile-background" width="975" height="300" src="<?php echo './upload/background/'.$user->getTmp('background'); ?>" alt="Profile banner" />
-		</div>
-		<div class="profile-picture" style="background-image: url('<?php echo './upload/profile/'.$user->getTmp('photo'); ?>')">
-			<?php if ($user->isMyProfile($userid) == true)
-				echo '<div class="profile-picture-edit">
-						<a href="index.php?act=changeProfilePhoto" id="editPhotoLink" style="text-decoration: none;">Edit</a>
-					  </div>';
+
+		<div class="profile">
+			<div class="profile-banner">
+				<img class="profile-background" width="975" height="300" src="<?php echo './upload/background/'.$user->getTmp('background'); ?>" alt="Profile banner" />
+			</div>
+			<div class="profile-picture" style="background-image: url('<?php echo './upload/profile/'.$user->getTmp('photo'); ?>')">
+				<?php if ($user->checkIfIsMyProfile() == true)
+					echo '<div class="profile-picture-edit">
+							<a href="index.php?act=changeProfilePhoto" id="editPhotoLink" style="text-decoration: none;">Edit</a>
+					  	  </div>';
 				?>
-		</div>	
+			</div>
 		
-		<div class="profile-stats">
-			<ul id="profileStatsUL">
-				<li id="TweetCount"><?php echo $user->getTmp('tweets'); ?> <span>Tweety</span></li>
-				<li id="FollowingCount"><?php echo $user->getTmp('following') ?> <span>Obserwowani</span></li>
-				<li id="FollowersCount"><?php echo $user->getTmp('followers'); ?><span>Obserwujący</span></li>
-			</ul>
-			<?php
-		
-			if ($user->isMyProfile($userid) == true){
-				echo '<a href="javascript:void(0);" class="follow">Edit background photo</a>';
-			} else {
-				echo '<a href="javascript:void(0);" class="follow">Follow '.$user->getTmp('name').'</a>';
-			}
-			?>
+			<div class="profile-stats">
+				<ul id="profileStatsUL">
+					<li id="TweetCount"><?php echo $user->getTmp('tweets'); ?> <span>Tweety</span></li>
+					<li id="FollowingCount"><?php echo $user->getTmp('following') ?> <span>Obserwowani</span></li>
+					<li id="FollowersCount"><?php echo $user->getTmp('followers'); ?><span>Obserwujący</span></li>
+				</ul>
+				<?php
+					if ($user->checkIfIsMyProfile() == true){
+						echo '<a href="javascript:void(0);" class="follow">Edit background photo</a>';
+					} else {
+						echo '<a href="javascript:void(0);" class="follow">Follow '.$user->getTmp('name').'</a>';
+					}
+				?>
+			</div>
 		</div>
-		
+		<h1 class="profile-name"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?><small><?php echo ' @'.$user->getTmp('login'); ?></small></h1>
 	</div>
-	<h1 class="profile-name"><?php echo ucfirst($user->getTmp('name')).' '.ucfirst($user->getTmp('surname')); ?><small><?php echo ' @'.$user->getTmp('login'); ?></small></h1>
-	</div>
+
 	<div class="profile-info">
 		<p style="text-align:center; margin-top: 5px;"><?php echo $user->getTmp('desc');?></p>
 		<p style="margin-left: 12px; margin-top: 15px;"><span class="glyphicon glyphicon-map-marker" style="color: gray;"></span> <?php echo $user->getTmp('city'); ?></p>
 		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-link" style="color: gray;"></span> <?php echo $user->getTmp('page'); ?></p>
 		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-calendar" style="color: gray;"></span> <?php echo substr($user->getTmp('createdate'), 0, -9); ?></p>
 	</div>
+
 	<div class="tweets">
-		<?php if ($user->isMyProfile($userid) == true){ ?>
+		<?php if ($user->checkIfIsMyProfile() == true){ ?>
             <form action="index.php?act=newTweet" method="post" id="newTweetForm">
 		        <textarea class="textarea-tweet" name="newTweetText"></textarea><br><span class="textarea-count"></span>
 		        <input class="tweets-mesageboxButton" type="submit" value="Tweet">
             </form>
 
 		<?php
+			}
 			$tweet->showTweets($user->getTmp('email'));
 
-		} else {
-			$tweet->showTweets($user->getTmp('email'));
-		} ?>
+		 ?>
 
 	</div>
 
-<div class="footer"><p style="font-width: 40px">by Adrian Tracz</p></div>
+	<div class="footer">
+		<p style="font-width: 40px">by Adrian Tracz</p>
+	</div>
+
 </body>
 
 </html>
 <?php
-
 }	
 

@@ -18,8 +18,11 @@
                     imageUrls: [
                         './template/img/bg1.jpg',
                         './template/img/bg3.jpg',
-			'./template/img/bg4.jpg',
-			'./template/img/bg2.jpg'
+						'./template/img/bg4.jpg',
+						'./template/img/bg5.jpg',
+						'./template/img/bg2.jpg',
+						'./template/img/bg6.jpg',
+						'./template/img/bg7.jpg'
                     ],
                     fadeSpeed: 1000,
                     duration: 6000,

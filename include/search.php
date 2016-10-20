@@ -6,7 +6,6 @@ if(isset($_POST['queryString'])) {
 
 
     if (strlen($queryString) > 0) {
-        //$query = $db->query("SELECT * FROM search s INNER JOIN categories c ON s.cat_id = c.cid WHERE name LIKE '%" . $queryString . "%' ORDER BY cat_id LIMIT 8");
         $query = $db->connect()->query("SELECT `users`.`login`, `users`.`name`, `users`.`surname`, `users_profile_images`.`photo` FROM `users` JOIN `users_profile_images` ON `users`.`email` = `users_profile_images`.`id` WHERE `login` LIKE '%" . $queryString . "%' OR `name` LIKE '%" . $queryString . "%' OR `surname` LIKE '%" . $queryString . "%' ORDER BY users.id LIMIT 5");
         if ($query) {
             while ($result = $query->fetch_object()) {
