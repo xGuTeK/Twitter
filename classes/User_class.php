@@ -14,10 +14,7 @@ class User extends DB {
     private $FollowingCount;
     private $tmp;
    
-	function phpAlert($msg){
-		echo '<script type="text/javascript">alert("'.$msg.'");</script>';
-	}
-        
+
     function getEmail() {
         return $this->email;
     }
@@ -236,9 +233,7 @@ class User extends DB {
     function setFollowingCount($FollowingCount) {
         $this->FollowingCount = $FollowingCount;
     }
-    
 
-	
     function getTweetsCount() {
         return $this->TweetsCount;
     }
@@ -268,8 +263,7 @@ class User extends DB {
         }
 	}
 	function checkIfIsMyProfile(){
-	    echo parent::getLogin();
-	    if(parent::getLogin() == $this->getTmp('login')){
+	    if($this->getLogin() == $this->getTmp('login')){
 
 	        return true;
         }
