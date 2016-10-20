@@ -8,13 +8,18 @@ require_once 'classes\Comment_class.php';
 $db = new DB();
 $user = new User();
 
-if($user->isLogged() == false){
+if(!isset($_SESSION["email"]) && empty($_SESSION["email"])){
 
+	
 	if(isset($_GET["act"])){
 		switch($_GET["act"]){
+		
 			case "login":
 				include_once 'include\login.php';
 				break;
+			case "logut":
+				include_once 'include\logout.php';
+				break;			
 			case "register":
 				include_once 'include\register.php';
 				break;
@@ -24,18 +29,26 @@ if($user->isLogged() == false){
 	} else {
         include 'include\index_notlogged.php';
     }
+	
+	
 } else {
 
     $user->loadDataFromDb($_SESSION["email"], "login");
     $tweet = new Tweet();
     $comment = new Comments();
-
+	/*if($_GET['act'] != 'tweet'){
+        include 'include\index_logged.php';
+    }*/
     if(isset($_GET["profile"])){
         $userid = $_GET["profile"];
         $user->loadDataFromDb($user->convertLoginToEmail($userid));
 
     } else {
         $userid = $user->getLogin();
+
+        if(!$user->getLogin()){
+
+        }
     }
 
 	if(isset($_GET["act"])){
