@@ -48,8 +48,8 @@ if($user->isLogged() == false){
                 include_once 'include\register_steptwo.php';
                 break;
             case "editphoto":
-				include_once 'include\views\edit_profile_photo.php';
-				break;
+                include_once 'include\views\edit_profile_photo.php';
+                break;
             case "photoupload":
                 include_once 'include\edit_profile_photo.php';
                 break;
