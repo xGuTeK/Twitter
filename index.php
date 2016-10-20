@@ -47,7 +47,7 @@ if($user->isLogged() == false){
             case "registerStepTwo":
                 include_once 'include\register_steptwo.php';
                 break;
-			case "editphoto":
+            case "editphoto":
 				include_once 'include\views\edit_profile_photo.php';
 				break;
             case "photoupload":
