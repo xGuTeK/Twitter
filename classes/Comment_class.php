@@ -39,7 +39,7 @@ class Comments extends Tweet
 
         if($tweet_id > 0){
 
-            $sql = "SELECT * FROM `comments` WHERE `tweet_id` = '$tweet_id';";
+            $sql = "SELECT * FROM `comments` WHERE `tweet_id` = '$tweet_id' ORDER BY `comment_date` DESC ;";
 
             $result = $this->connect()->query($sql);
 
