@@ -73,7 +73,7 @@ if($user->isLogged() == false){
                 $user->logout();
                 header("Location: index.php");
                 break;
-		}
+        }
 	} else {
         include 'include\index_logged.php';
     }
