@@ -37,15 +37,15 @@
             echo '
                   <div class="ReplyContent">
                     <div class="ReplyProfilePhoto">
-                        <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile" onmouseover="tooltip.pop(this, \'#profile-tooltip\', {position:0, cssClass:\'no-padding\'})">
+                        <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile" onmouseover="tooltip.pop(this, \'#profile-tooltip'.$comment['id'].'\', {position:0, cssClass:\'no-padding\'})">
                             <div class="profile-small-photo" style="background-image: url(./upload/profile/'.$this->getTmp('photo').'); background-size: cover; background-repeat: no-repeat;"></div>
                         </a>                    
                     </div>
                     <div class="ReplyProfileInfo">
-                        <span class="ReplyName" onmouseover="tooltip.pop(this, \'#profile-tooltip\', {position:0, cssClass:\'no-padding\'})">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'</span>
-                        <span class="ReplyLogin" onmouseover="tooltip.pop(this, \'#profile-tooltip\', {position:0, cssClass:\'no-padding\'})">@'.$this->getTmp('login').'</span>
+                        <span class="ReplyName" onmouseover="tooltip.pop(this, \'#profile-tooltip'.$comment['id'].'\', {position:0, cssClass:\'no-padding\'})">'.ucfirst($this->getTmp('name')).' '.ucfirst($this->getTmp('surname')).'</span>
+                        <span class="ReplyLogin" onmouseover="tooltip.pop(this, \'#profile-tooltip'.$comment['id'].'\', {position:0, cssClass:\'no-padding\'})">@'.$this->getTmp('login').'</span>
                         <div style="display:none;">
-                            <div id="profile-tooltip" style="width: 300px; min-height: 270px;">
+                            <div id="profile-tooltip'.$comment['id'].'" style="width: 300px; min-height: 270px;">
                                 <div style=" position: relative; cursor: pointer;">
                                     <img class="" width="300" height="100" src="./upload/background/'.$this->getTmp('background').'" alt="Profile banner" />
                                     <a href="index.php?profile='.$this->getTmp('login').'" class="tweetprofile">

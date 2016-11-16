@@ -1,7 +1,7 @@
 <div class="nav_search">
     <form id="searchForm">
         <div class="nav_search_field">
-            <input type="text" id="searchInput" placeholder="Enter your search" maxlength="20" onkeyup="lookup(this.value);"/>
+            <input type="text" id="searchInput" placeholder="Wyszukaj osoby" maxlength="20" onkeyup="lookup(this.value);"/>
         </div>
         <input type="submit" id="searchSubmit" value="" />
         <div id="suggestions"></div>

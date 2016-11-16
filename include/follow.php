@@ -8,7 +8,6 @@ if (isset($_GET['act']))
     }
     if ( $_GET['act'] == 'unfallow' && isset($_GET['id']) && ($_GET['id'] > 0) )
     {
-        echo '4';
         $unFollowId = $db->connect()->escape_string($_GET['id']);
         $user->userFollow($user->getUserID(), $unFollowId, "unfollow");
     }

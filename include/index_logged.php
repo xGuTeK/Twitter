@@ -133,22 +133,27 @@ if($user->isLogged() != false){
 		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-link" style="color: gray;"></span> <?php echo $user->getTmp('page'); ?></p>
 		<p style="margin-left: 12px; margin-top: 5px;"><span class="glyphicon glyphicon-calendar" style="color: gray;"></span> <?php echo substr($user->getTmp('createdate'), 0, -9); ?></p>
 	</div>
+	<?php
+	if(!isset($_GET['q'])) {
+		?>
+		<div class="tweets">
+			<?php if ($user->checkIfIsMyProfile() == true) { ?>
+				<form action="index.php?act=newTweet" method="post" id="newTweetForm">
+					<textarea class="textarea-tweet" name="newTweetText"></textarea><br><span
+						class="textarea-count"></span>
+					<input class="tweets-mesageboxButton" type="submit" value="Tweet">
+				</form>
 
-	<div class="tweets">
-		<?php if ($user->checkIfIsMyProfile() == true){ ?>
-            <form action="index.php?act=newTweet" method="post" id="newTweetForm">
-		        <textarea class="textarea-tweet" name="newTweetText"></textarea><br><span class="textarea-count"></span>
-		        <input class="tweets-mesageboxButton" type="submit" value="Tweet">
-            </form>
-
-		<?php
+				<?php
 			}
 			$tweet->showTweets($user->getTmp('email'));
 
-		 ?>
+			?>
 
-	</div>
-
+		</div>
+		<?php
+	}
+		?>
 	<div class="footer">
 		<p style="font-width: 40px">by Adrian Tracz</p>
 	</div>

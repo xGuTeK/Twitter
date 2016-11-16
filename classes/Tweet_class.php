@@ -212,8 +212,90 @@ class Tweet extends User{
             }  
         }
     }
-        
-        
-   
+    function likesTweetCount($tweetID){
+        $tweetID = $this->connect()->escape_string($tweetID);
+
+        if($tweetID > 0){
+            $sql = "SELECT `tweet_id` FROM `tweets_likes` WHERE `tweet_id`='$tweetID';";
+
+            $result = $this->connect()->query($sql);
+
+            if($result->num_rows >= 0){
+
+              return $result->num_rows;
+            }
+        }
+
+    }
+    function checkIfLikedTweet($tweetID, $userID){
+        $tweetID = $this->connect()->escape_string($tweetID);
+        $userID = $this->connect()->escape_string($userID);
+
+        if(($userID > 0) && ($tweetID >0)){
+            $sql = "SELECT `user_id` FROM `tweets_likes` WHERE `tweet_id`='$tweetID' AND `user_id`='$userID';";
+            $result = $this->connect()->query($sql);
+
+            if($result->num_rows > 0){
+
+                return true;
+            }
+
+            return false;
+        }
+    }
+    function likeTweet($tweetID, $userID, $option = 'like'){
+        $tweetID = $this->connect()->escape_string($tweetID);
+        $userID = $this->connect()->escape_string($userID);
+
+        if(($userID > 0) && ($tweetID >0)){
+            if($option == 'like') {
+                $sql = "INSERT INTO `tweets_likes` (`tweet_id`, `user_id`) VALUES ('$tweetID', '$userID');";
+            }
+
+            if($option == 'unlike'){
+                $sql = "DELETE FROM `tweets_likes` WHERE `tweet_id`='$tweetID' AND `user_id`='$userID';";
+            }
+
+            $query = $this->connect()->query($sql);
+
+            if($query) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    function checkIfUserIsTweetAuthor($tweetID, $userID){
+        $tweetID = $this->connect()->escape_string($tweetID);
+        $userID = $this->connect()->escape_string($userID);
+
+        if ( ($tweetID > 0) ) {
+            $sql = "SELECT `id` FROM `tweets` WHERE `id`='$tweetID' AND `user_id`='$userID';";
+
+            $result = $this->connect()->query($sql);
+
+            if($result->num_rows > 0){
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function deleteTweet($tweetID, $userID){
+        $tweetID = $this->connect()->escape_string($tweetID);
+        $userID = $this->connect()->escape_string($userID);
+
+        if($this->checkIfUserIsTweetAuthor($tweetID, $userID) == true){
+            $sql = "DELETE FROM `tweets` WHERE `id`='$tweetID' AND `user_id`='$userID';";
+
+           $result = $this->connect()->query($sql);
+
+            return true;
+        }
+
+        return false;
+    }
 
 }

@@ -63,11 +63,21 @@ if($user->isLogged() == false){
             case 'follow':
                 include_once 'include\follow.php';
                 break;
+            case 'like':
+            case 'unlike':
+                include_once 'include\like.php';
+                break;
+            case 'deleteTweet':
+                include_once 'include\delete_tweet.php';
+                break;
             case 'newReply':
                 include_once 'include\newReply.php';
                 break;
             case 'search':
                 include_once 'include\search.php';
+                if(isset($_GET['q'])){
+                    include_once 'include\index_logged.php';
+                }
                 break;
             case 'logout':
                 $user->logout();
